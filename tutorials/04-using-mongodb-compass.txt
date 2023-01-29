@@ -1,0 +1,17 @@
+intinya guina lah siga phpmyadmin ...
+
+terus kalau tambah satu data mah cuman objek data na doang,
+lamun lebih tihiji mah dibungkus kana array ...
+
+{
+  "property" : "value"
+}
+
+[
+  {
+    "property": "value"
+  },
+  {
+    "property": "value"
+  }
+]
