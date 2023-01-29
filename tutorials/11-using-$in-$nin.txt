@@ -1,0 +1,13 @@
+kita belajar $in dan $nin
+
+Misal kita akan mencari data buku yang memiliki rating 7, 8, 9
+Dari pada kita melakukan ini :
+    db.books.find({ $or: [{ $rating: 7 }, { $rating: 8 }, { $rating: 9 }] })
+
+kita bisa melakuakn ini :
+    db.books.find({ $rating: { $in: [7, 8, 9] } })
+
+hasil keduanya sama.
+
+kebalikan dari $in ya not $in alias $nin 
+    db.books.find({ $rating: { $nin: [7, 8, 9] } })
