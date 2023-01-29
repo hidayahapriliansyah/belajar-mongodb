@@ -1,0 +1,30 @@
+di sini kita belajar 
+    $gt = greater than
+    $gte = greater than or equal to
+    $lt = less than 
+    $lt = less than or equal to 
+    $or ini buat operator logika 
+
+
+memilih buku dengan rating di atas 7
+    db.books.find({ rating: { $gt: 7 } })
+
+memilih buku dengan rating diatas atau sama dengan 7
+  db.books.find({ rating: { $gte: 7 } })    
+
+memilih buku dengan rating di bawah 7
+    db.books.find({ rating: { $t: 7 } })
+
+memilih buku dengan rating di bawah atau sama dengan 7
+    db.books.find({ rating: { $te: 7 } })
+
+Nahhh kalau penggunaan $or, siornya jadi depan alias jadi 
+key pertama nya, yang mana valuenya berupa array yang berisi
+objek key dan value properti filter nya.
+
+contoh nya
+memilih buku dengan rating 7 atau penulisnya Masashi Kishimoto
+    db.books.find({ $or: [{ rating: 7 }, { author: "Masashi Kishimoto" }]})
+
+memilih buku dengan rating diatas atau sama dengan 7 atau rating di bawah sama dengan 4
+    db.books.find({ $or: [{rating: { $gte: 7}}, {rating : {$lte: 4}}] })
