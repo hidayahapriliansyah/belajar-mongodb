@@ -25,3 +25,7 @@ nanti bakal dibahas ceunah ...
 intina collection teh table yang isinya kumpulan document,
 si document eta record na tea. cuman record eta bentukna json.
 nu mana lamun json engke na bisa nested objek, tawa array.
+
+oh iya terus setiap untuk document, mongodb secara otomatis 
+menambahkan property "_id" yagn berisikan object id. Pasti tahulah
+fungsina jeung naon.
