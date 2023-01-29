@@ -1,0 +1,7 @@
+install mongodb community :
+    https://www.mongodb.com/try/download/community
+
+install mongoshell :
+    https://www.mongodb.com/try/download/tools
+
+done
