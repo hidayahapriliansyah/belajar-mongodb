@@ -1,0 +1,21 @@
+BISA DICHAINING YA GES YA ...
+
+kita belajar limit(), sort(), count()
+
+limit() memerlukan argumen number. mau dilimit berapa?
+
+    db.books.find().limit(3)
+
+sort() argumene berupa objek dengan key adalah nama dari property 
+yang akan disort, lalu value untuk asc dan desc, 1 untuk asc, -1 untuk desc
+
+    db.books.sort({title: 1})
+
+count() untuk ngitung kayak SELECT COUNT(*) mun dina sql mah 
+
+    db.books.find().count()
+
+terus itu semua bisa dichaining jadi kayak 
+  
+    db.books.find().sort().limit() sakarepna ..
+
