@@ -1,0 +1,4 @@
+Kita bakal ngehubuningin Mongodb ke node js huhuhuy ...
+
+ini dokumentasi nya :
+https://www.mongodb.com/docs/drivers/node/current/quick-start/
