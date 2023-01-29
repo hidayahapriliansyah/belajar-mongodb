@@ -16,4 +16,22 @@
       "body": "Awesome"
     }
   ]
+},{
+  "_id": {
+    "$oid": "63d643e7141705180b64fcd7"
+  },
+  "title": "Naruto Kecil",
+  "author": "Masashi Kishimoto",
+  "pages": 40,
+  "rating": 9,
+  "reviews": [
+    {
+      "name": "Hidayah",
+      "body": "it's great"
+    },
+    {
+      "name": "Firmansyah",
+      "body": "wow"
+    }
+  ]
 }]

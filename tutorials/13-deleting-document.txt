@@ -21,3 +21,8 @@ Contoh kasus:
 
     semua buku dengan author hidayah bakal kehapus. kalau pakai deleteOne 
     mah bakal kehapus cuman satu yang pertama.
+
+btw, hati hati buat ngedelete semua document bisa pake 
+    db.books.deleteMany({}).
+
+parameter deleteMany() diisi objek kosong. boom semua kehapus.
