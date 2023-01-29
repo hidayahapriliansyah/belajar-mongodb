@@ -1,0 +1,9 @@
+untuk show databases :
+    show databases
+    show dbs 
+
+pindah database :
+    use database-name 
+
+terus si mongo mah bisa nge use database yang gak ada awokwok ...
+tapi nanti pas nambah collection bakal bikin dulu database nya kok ...
