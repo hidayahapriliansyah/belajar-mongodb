@@ -1,0 +1,21 @@
+initinya nambahin value yang ada objeknya. entah itu 
+objek langsung atau array yang isinya objek.
+
+pasti paham lah ...
+
+db.books.insertOne(
+  {
+    title: ...,
+    ...,
+    reviews: [
+      {
+        name: "Yoshi",
+        body: "Yeas"
+      },
+      {
+        name: "Heyo",
+        body: "Wow"
+      }
+    ]
+  }
+)
