@@ -1,0 +1,30 @@
+disini kita belajar :
+
+.find()
+
+db.books.find() itu artinya kayak SELECT * FROM books 
+cuma nanti si shell nampilinnya 20 20, kalau mau ke hasil selanjutnya
+teken it untuk iterate (ngulang 20 record lagi).
+
+nah buat nyeleksi property nya kayak kalau
+SELECT title, author, pages FROM books 
+
+itu jadi gini
+    db.books.find({}, {title: 1, author: 1, pages: 1})
+
+nah buat nyari kayak 
+    SELECT * FROM books WHERE title = 'Naruto'
+
+jadi gini
+    db.books.find({ title: "Naruto" })
+
+kalau mau nambahin filter property nya lagi bisa 
+    db.books.find({ title: "Naruto" }, { title: 1, pages: 1 })
+
+Bisa disebut gini 
+function find() argumen pertama berfungsi sebagai filter
+dengan tipe data objek.
+argumen ke dua berfungsi sebagai filter property yang akan ditampilkan,
+sama juga berbentuk objek.
+
+
