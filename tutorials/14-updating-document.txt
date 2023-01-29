@@ -1,0 +1,75 @@
+kita akan belajar :
+    updateOne()
+    updateMany()
+    $set
+    $inc
+    $pull
+    $push
+    $each
+
+1. updateOne()
+    Ini buat ngapdet satu document. method ini punya 2 parameter.
+    Parameter pertama adalah document mana yang mau diupdate,
+    parameter ke dua adalah apanya yang mau diupdate.
+    nah diparameter ke dua nanti paka $set.
+
+    contoh :
+      Kita mau ngapdet rating, sama pages buku berdasarkan id. Id pasti cuman satu kan ya ...
+
+      db.books.updateOne({_id: "sdfsd834sdf"}, {$set: { rating: 8, pages: 360 }})
+
+2. updateMany()
+    Ini ngapdet banyak document. sama kayak updateOne(),
+    ini punya 2 parameter dengan kebutuhan parameter yang sama.
+
+    Contoh :
+      Kita salah nulis nama author Terry Prachett harusnya t diujungnya satu.
+      Kan pasti banyak yah yang authornya Terry Prachett, kita update semuanya pakai updateMany.
+
+      db.books.updateMany({ author: "Terry Prachett" }, { $set: { author: "Terry Prachet" } })
+
+3. $inc 
+    Ini buat increment update. Misal kita mau update halaman nya jadi nambah 2 lembar,
+    sedangkan kita gak tahu tuh jumlah halaman nya berapa, masa mau dihard update langsung masukkin nilainnya?
+    nanti salah lagi bisa kurang atau lebih dari 2 malah.
+
+    untuk kita kita pakai $inc.
+
+    Contoh: 
+    Kita mau update buku berdasarkan id dimana pagesnya ditambah 2 lebar.
+  
+    db.books.updateOne({ _id: "sdas345asd" }, { $inc: { pages: 2 } }})
+
+    kalau mau dicremen ya tinggal pake angka negatif
+
+    db.books.updateOne({ _id: "sdas345asd" }, { $inc: { pages: -2 } }})
+
+4. $pull
+    Ini buat ngehapus value dari document yang memiliki jenis data array.
+
+    Contoh :
+      Kita mau update buku dengan menghapus salah satu kategorinya yaitu kategori fantasy
+
+      db.books.updateOne({ _id: "sdf2323ss" }, { $pull: { genres: 'fantasy' } })
+
+5. $push 
+    Ini kebalikan $pull. Kita bakal nambahin sesuatu ke array dari sebuah document.
+
+    Contoh:
+    Kita mau nambahin kategory fantasy ke salah satu buku.
+
+    db.books.updateOne({ _id: "sdf2323ss" }, { $push: { genres: 'fantasy' } })
+
+6. $each 
+    Ini buat ngepush (ngepull mah kagak bisa nya?) banyak value ke array document.
+
+    kan kalau $push sama $pull itu bisanya cuma satu ya ...
+    kita mau lakuinnya banyak ... 
+
+    Contoh :
+    Kita mau nambahin genre fantasy, sama adventure ke sebuah buku
+
+    db.books.updateOne({ _id: "sdf2323ss" }, { $push: { genres: { $each: ['fantasy', 'adventure'] } } })
+
+PRAKTEKEUN HEULA COY!
+
