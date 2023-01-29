@@ -1,0 +1,27 @@
+collection and document :
+
+collection itu bisa disebut kayak table
+
+Misalnya ada :
+   user, blog, comments.
+
+mirip kayak table lah ...
+
+si collection ini punya record. Nah si record itu isinya document tea.
+misalya dalam collection user terdapat 10 docuemnt user.
+struktur document nya itu bentuknya json, ini disebutnya b json (binary json) :
+  {
+    "username": "adi",
+    "name": "hidayah",
+    "hobies": [
+        "coding",
+        "designing",
+        "writing"
+      ]
+  }
+nah karena bentuk json ini kita bisa ngelakuin nested objek atau array ...
+nanti bakal dibahas ceunah ...
+
+intina collection teh table yang isinya kumpulan document,
+si document eta record na tea. cuman record eta bentukna json.
+nu mana lamun json engke na bisa nested objek, tawa array.
