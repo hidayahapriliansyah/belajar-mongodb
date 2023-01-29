@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "63d61d6c117c9b2f78be28c5"
+  },
+  "title": "Naruto Shippuden",
+  "author": "Masashi Kishimoto",
+  "pages": 40,
+  "rating": 9,
+  "reviews": [
+    {
+      "name": "Yoshi",
+      "body": "Great!"
+    },
+    {
+      "name": "Mario",
+      "body": "Awesome"
+    }
+  ]
+}]

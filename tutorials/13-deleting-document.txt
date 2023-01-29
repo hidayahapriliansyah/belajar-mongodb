@@ -1,0 +1,23 @@
+kita akan belajar deleteOne() sama deleteMany().
+
+Ini jadi ampir sama kayak insert. Ada insertOne sama inserMany().
+deleteOne() hanya akan menghapus document pertama meskipun argumen
+yang dimasukkan berada di banyak document, document yang pertama akan dihapus.
+
+Kalau deleteMany() semua dokumen yang memiliki atribut akan dihapus.
+
+Contoh kasus:
+
+1. Kita akan menghapus satu buku berdasarkan id
+
+    db.books.deleteOne({ _id: "sdf87wedsasdsf" })
+
+    ya maka akan ke delete satu record itu lagi pula kan itu juga unik jadi pasti 
+    cuma ke target nya satu.
+
+2. Kita ngehapus semua buku atas penulis Hidayah
+
+    db.books.deleteMany({ author: "hidayah" })
+
+    semua buku dengan author hidayah bakal kehapus. kalau pakai deleteOne 
+    mah bakal kehapus cuman satu yang pertama.
