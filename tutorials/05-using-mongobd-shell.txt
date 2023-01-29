@@ -7,3 +7,19 @@ pindah database :
 
 terus si mongo mah bisa nge use database yang gak ada awokwok ...
 tapi nanti pas nambah collection bakal bikin dulu database nya kok ...
+
+-------
+
+terus di filed pencariannya bisa pakai notasi object js lagi ..
+
+    { rating: 9 }
+
+bakal nyari document yang property rating nya 9 
+
+----
+
+terus di mongoshell bisa jadi kayak repl siah euy
+bisa bikin varible misal :
+    var name = 'hidayah'
+
+    bakal muncul name na hidayah
