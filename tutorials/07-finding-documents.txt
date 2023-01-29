@@ -18,6 +18,10 @@ nah buat nyari kayak
 jadi gini
     db.books.find({ title: "Naruto" })
 
+buat nampilin satu aka findOne, tingal pake findOne() sama kayak find
+cuma nampilinnya di limit 1
+    db.books.findOne({ title: "Naruto" })
+
 kalau mau nambahin filter property nya lagi bisa 
     db.books.find({ title: "Naruto" }, { title: 1, pages: 1 })
 
