@@ -1,0 +1,47 @@
+kita bakal belajar queurying array sama nested document.
+
+A. Querying array
+contoh kasus :
+    1. Kita ingin mengambil buku yang memiliki genre fantasy.
+        db.books.find({ genres: 'fantasy' })
+    
+    ini berarti mongodb akan mereturn semua buku yang di dalam genres yang mana genres 
+    adalah array yang memiliki value 'fantasy'. entah itu genre nya memiliki genre lain
+    selama ada 'fantasy' maka akan dikembalikan
+    2. Kita ingin mengambil buku yang hanya memiliki genre fantasy
+      db.books.find({ genres: ['fantasy'] })
+
+    Dengan secara eksplisit menuliskan notasi array [], maka mongodb hanya akan 
+    mengembalikan buku yang hanya memiliki genre fantasy dari arrya genres tersebut.
+
+    3. Kita ingin mengambil buku yang hanya memiliki 2 genre fantasy dan magic
+        db.books.find({ genres: ['fantasy', 'magic'] })
+    
+    ini sama kayak kasus kedua. yang muncul hanya yang persis genrenya fantasy dan magic.
+    jika misalnya ada genre lain meskipun memiliki genre tersebut maka tidka termasuk kriteria.
+
+    4. Kita ingin mengambil buku yang memiliki genre fantasy dan sci-fi.
+        Ini kasusnya kayak gabungan no 1 dan 2. jika kita menggunakan notasi arrya langsung 
+        seperti ['fantasy', 'sci-fi'] maka yang terpilih hanya dokumen yang persis hanya memiliki 
+        2 genre tesebut. Lalu gimana kalau misal kita mau nyari yang ada 2 genre itu, tapi kalau
+        ada genre lainnya ya oke oke aja misal genrenya ['fantasy', 'sci-fi', 'magic']
+        nahhh ... kita pakai $all
+
+            db.books.find{ genres: { $all: ['fantasy', 'sci-fi'] } }
+
+B. Querying nested document
+Contoh kasus: 
+  kita ingin mengambil data yang di review oleh luigi.
+  struktur reviews itu kayak gini 
+      "reviews": [
+        {"name": "luigi", "body": "Awesome!"},
+        {"name": "martin", "body": "Great"}
+      ]
+  
+  nah maka query nya adalah 
+      db.books.find({ "reviews.name": "luigi" })
+
+  ini mirip kayak ngakses property dari sebuah objek
+  review.name (ambil properti name dari objek review).
+  ya meskipun kita tahu kalau review itu array, tapi emang mongodb kayak giini cara nya ..
+
