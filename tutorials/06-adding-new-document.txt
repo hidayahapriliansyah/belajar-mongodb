@@ -1,0 +1,17 @@
+db = database yang saat ini digunakan 
+.books = nam collection yang ditarget
+.insertOne() = function untuk menambahkan data. parameternya adalah objek 
+.insertMany() = fungction untuk menambahkan data, parameter array.
+
+cara insert 1 data /document :
+     db.books.insertOne({title: "Naruto Shippuden", author: "Masashi Kishimoto", pages: "40", genres: ["fantasy", "adventure"], rating: 9})
+
+
+insert multiple data :   
+    db.books.insertMany([ { title: "Naruto", author: "Masashi Kishimoto", pages: "40", genres: [ "fantasy", "adventure"], rating: 9 }, { title: "Tokyo Revengers", author: "Ken Akui", pages: 40, genres: ["fantasy", "fight"], rating: 9 }])
+
+----
+oh iya terus dimongo juga bisa nambahin data ke 
+collection yang gak ada. nanti si collectionnya bakal ditambahin dulu ...
+
+     
