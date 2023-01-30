@@ -1,0 +1,284 @@
+Ini kita bener bener belajar konsep pengambilan data dari database
+
+ada yang disebut cursor/ pointer.
+
+// routes
+app.get('/books', (req, res) => {
+  let books = [];
+
+  db.collection('books')
+    .find() // find itu mereturn cursor
+    .sort({ author: 1 })
+    .forEach((book) => books.push(book))
+    .then(() => {
+      res.status(200).json(books);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+});
+
+nah kalau di mongoshell kan tiba tiba db.books.find() ya ...
+terus muncul tuh kumpulan dokumennya ... si find() ngembaliin
+array yang isinya dokumen dokuemn itu kan kayak gini : 
+
+    [
+      {
+      _id: ObjectId("63d61d6c117c9b2f78be28c5"),
+      title: 'naruto',
+      author: 'Masashi Kishimoto',
+      pages: 40,
+      rating: 9,
+      reviews: [
+          {
+            name: 'Yoshi',
+            body: 'Great!'
+          },
+          {
+            name: 'Mario',
+            body: 'Awesome'
+          }
+        ],
+      genres: [
+          'fantasy',
+          'adventure',
+          'ninjas',
+          'test',
+          'comic'
+        ]
+      },
+      {
+        _id: ObjectId("63d643e7141705180b64fcd7"),
+        title: 'Naruto Kecil',
+        author: 'Masashi Kishimoto',
+        pages: 40,
+        rating: 9,
+        reviews: [
+          {
+            name: 'Hidayah',
+            body: "it's great"
+          },
+          {
+            name: 'Firmansyah',
+            body: 'wow'
+          }
+        ]
+      }
+    ]
+
+Kela jadi cursor teh array nyah? tapi katanya cursor itu merupakan kumpulan
+dokumen yang diarahkan oleh find() tersebut. cuma kalau di mongo shell keliatan
+nya tiba tiba langsung di iterasi/looping buat nammpilin datanya di shell,
+nah itu kalau di shel secara otomatis gitu, beda halnya kalau mau ngambilnya
+kayak dari node js, maka kita harus manul mengiterasi data tersebut pakai forEach.
+enya berarti array kan nya.
+
+nah si cursor yang di return itu punya method yang bisa digunakan yaitu 
+toArray, forEach
+
+NAAHHH CURSOR BENTUKNYA KAYAK GINI :
+
+[nodemon] app crashed - waiting for file changes before starting...
+[nodemon] restarting due to changes...
+[nodemon] starting `node app.js`
+<ref *3> FindCursor {
+  _events: [Object: null prototype] {},
+  _eventsCount: 0,
+  _maxListeners: undefined,
+  [Symbol(kCapture)]: false,
+  [Symbol(client)]: <ref *1> MongoClient {
+    _events: [Object: null prototype] {},
+    _eventsCount: 0,
+    _maxListeners: undefined,
+    mongoLogger: MongoLogger {
+      componentSeverities: [Object],
+      maxDocumentLength: 1000,
+      logDestination: [WriteStream]
+    },
+    s: {
+      url: 'mongodb://localhost:27017/bookstore',
+      bsonOptions: [Object],
+      namespace: [MongoDBNamespace],
+      hasBeenClosed: false,
+      sessionPool: [ServerSessionPool],
+      activeSessions: [Set],
+      options: [Getter],
+      readConcern: [Getter],
+      writeConcern: [Getter],
+      readPreference: [Getter],
+      logger: [Getter],
+      isMongoClient: [Getter]
+    },
+    topology: Topology {
+      _events: [Object: null prototype],
+      _eventsCount: 26,
+      _maxListeners: undefined,
+      selectServerAsync: [Function (anonymous)],
+      bson: [Object: null prototype],
+      s: [Object],
+      client: [Circular *1],
+      [Symbol(kCapture)]: false,
+      [Symbol(waitQueue)]: [List]
+    },
+    [Symbol(kCapture)]: false,
+    [Symbol(options)]: [Object: null prototype] {
+      hosts: [Array],
+      compressors: [Array],
+      connectTimeoutMS: 30000,
+      dbName: 'bookstore',
+      directConnection: false,
+      metadata: [Object],
+      enableUtf8Validation: true,
+      forceServerObjectId: false,
+      heartbeatFrequencyMS: 10000,
+      keepAlive: true,
+      keepAliveInitialDelay: 120000,
+      loadBalanced: false,
+      localThresholdMS: 15,
+      logger: [Logger],
+      maxConnecting: 2,
+      maxIdleTimeMS: 0,
+      maxPoolSize: 100,
+      minPoolSize: 0,
+      minHeartbeatFrequencyMS: 500,
+      monitorCommands: false,
+      noDelay: true,
+      pkFactory: [Object],
+      raw: false,
+      readPreference: [ReadPreference],
+      retryReads: true,
+      retryWrites: true,
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 0,
+      srvMaxHosts: 0,
+      srvServiceName: 'mongodb',
+      waitQueueTimeoutMS: 0,
+      zlibCompressionLevel: 0,
+      userSpecifiedAuthSource: false,
+      userSpecifiedReplicaSet: false,
+      mongoLoggerOptions: [Object],
+      [Symbol(@@mdb.enableMongoLogger)]: false
+    }
+  },
+  [Symbol(namespace)]: MongoDBNamespace { db: 'bookstore', collection: 'books' },
+  [Symbol(id)]: null,
+  [Symbol(documents)]: List {
+    count: 0,
+    head: <ref *2> {
+      next: [Circular *2],
+      prev: [Circular *2],
+      value: null
+    }
+  },
+  [Symbol(initialized)]: false,
+  [Symbol(closed)]: false,
+  [Symbol(killed)]: false,
+  [Symbol(options)]: {
+    readPreference: ReadPreference {
+      mode: 'primary',
+      tags: undefined,
+      hedge: undefined,
+      maxStalenessSeconds: undefined,
+      minWireVersion: undefined
+    },
+    fieldsAsRaw: {},
+    promoteValues: true,
+    promoteBuffers: false,
+    promoteLongs: true,
+    serializeFunctions: false,
+    ignoreUndefined: false,
+    bsonRegExp: false,
+    raw: false,
+    enableUtf8Validation: true
+  },
+  [Symbol(session)]: ClientSession {
+    _events: [Object: null prototype] { ended: [Function] },
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    client: <ref *1> MongoClient {
+      _events: [Object: null prototype] {},
+      _eventsCount: 0,
+      _maxListeners: undefined,
+      mongoLogger: [MongoLogger],
+      s: [Object],
+      topology: [Topology],
+      [Symbol(kCapture)]: false,
+      [Symbol(options)]: [Object: null prototype]
+    },
+    sessionPool: ServerSessionPool { client: [MongoClient], sessions: [List] },
+    hasEnded: false,
+    clientOptions: [Object: null prototype] {
+      hosts: [Array],
+      compressors: [Array],
+      connectTimeoutMS: 30000,
+      dbName: 'bookstore',
+      directConnection: false,
+      metadata: [Object],
+      enableUtf8Validation: true,
+      forceServerObjectId: false,
+      heartbeatFrequencyMS: 10000,
+      keepAlive: true,
+      keepAliveInitialDelay: 120000,
+      loadBalanced: false,
+      localThresholdMS: 15,
+      logger: [Logger],
+      maxConnecting: 2,
+      maxIdleTimeMS: 0,
+      maxPoolSize: 100,
+      minPoolSize: 0,
+      minHeartbeatFrequencyMS: 500,
+      monitorCommands: false,
+      noDelay: true,
+      pkFactory: [Object],
+      raw: false,
+      readPreference: [ReadPreference],
+      retryReads: true,
+      retryWrites: true,
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 0,
+      srvMaxHosts: 0,
+      srvServiceName: 'mongodb',
+      waitQueueTimeoutMS: 0,
+      zlibCompressionLevel: 0,
+      userSpecifiedAuthSource: false,
+      userSpecifiedReplicaSet: false,
+      mongoLoggerOptions: [Object],
+      [Symbol(@@mdb.enableMongoLogger)]: false
+    },
+    explicit: false,
+    supports: { causalConsistency: false },
+    clusterTime: undefined,
+    operationTime: undefined,
+    owner: [Circular *3],
+    defaultTransactionOptions: {},
+    transaction: Transaction {
+      state: 'NO_TRANSACTION',
+      options: {},
+      _pinnedServer: undefined,
+      _recoveryToken: undefined
+    },
+    [Symbol(kCapture)]: false,
+    [Symbol(snapshotEnabled)]: false,
+    [Symbol(serverSession)]: null,
+    [Symbol(txnNumberIncrement)]: 0
+  },
+  [Symbol(filter)]: {},
+  [Symbol(builtOptions)]: {
+    raw: false,
+    promoteLongs: true,
+    promoteValues: true,
+    promoteBuffers: false,
+    ignoreUndefined: false,
+    bsonRegExp: false,
+    serializeFunctions: false,
+    fieldsAsRaw: {},
+    enableUtf8Validation: true,
+    readPreference: ReadPreference {
+      mode: 'primary',
+      tags: undefined,
+      hedge: undefined,
+      maxStalenessSeconds: undefined,
+      minWireVersion: undefined
+    }
+  }
+}
