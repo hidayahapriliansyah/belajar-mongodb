@@ -17,3 +17,40 @@ terus kita bikin file app.js yang isinya ini :
     app.get('/books', (req, res) => {
       res.json({ message: 'Welcome to the api' });
     });
+
+IEU LUMAYAN YEUH GEUS MULAI OOP ...
+
+intina keteh bikin file db.js nu fungsina jeung ngakoneksi si keun kana database.
+
+aya 2 fungsi nu dibikin
+pertama connectToDb()
+nu fungisina jeung ngakoneksi keun kana database MongoClient anu dah di require memehna ...
+    connectToDb: (cb) => {
+    MongoClient.connect('mongodb://localhost:27017/bookstore')
+      .then((client) => {
+        dbConnection = client.db();
+        return cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        return cb(err);
+      }); 
+  },
+
+MongoClient ke bakal ngabalikeun promise, so pakai then.
+si MongoClient.connect punya parameter alamat db na ...
+aya dina mongodb compass eta teh ..
+terus keteh bakal lamun berhasil bakal ngembaliin data client, nu 
+mana bisa ku urang ditangkap si client eta.
+ku urang masukkeun kana variable dbConnection.
+
+si fungsi ka 2   getDb: () => dbConnection,
+fungisna jeung ngareturn dbConnection.
+
+Padahal mah ku naon teu make dina safuntion?
+
+kalau na video namah kana si connectToDb teh punya
+para meter callback, nufungsina jeung ngecek error.
+lamun aya error dikembalikeun error na melalui callback.
+
+lamun teu error berarti connect pan? ambil we dbConnection tina getDb()
