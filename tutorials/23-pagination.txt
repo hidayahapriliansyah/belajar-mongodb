@@ -1,0 +1,36 @@
+Kita ngambil query parameter pake
+    req.query.namaKey
+
+dalam kasus ini kita pake 
+    req.query.p
+
+btw jalan dong logika ieu hahahah ...
+      const page = req.query.p === '0' ? 1 : req.query.p || 1;
+
+      HHAHAHAHAH ....
+
+Disini kita pake method
+    skip() sama limit()
+
+    app.get('/books', (req, res) => {
+      let books = [];
+
+      const page = req.query.p === '0' ? 1 : req.query.p || 1;
+      const booksPerPage = 3;
+
+      db.collection('books')
+        .find() // find itu mereturn cursor, 
+        .sort({ author: 1 })
+        .skip((page - 1) * booksPerPage)
+        .limit(booksPerPage)
+        .forEach((book) => books.push(book))
+        .then(() => {
+          res.status(200).json({
+            status: 'succes',
+            books: books,
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err });
+        });
+    });
