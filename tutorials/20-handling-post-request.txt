@@ -1,0 +1,32 @@
+handling post request ...
+
+kita perlu nulis ini dulu app.use(express.json()). Kenapa?
+Itu adalah middleware.
+
+sumber: 
+    https://masteringjs.io/tutorials/express/express-json
+
+katanya : 
+    The app.use() function adds a new middleware to the app. Essentially, whenever a request hits your backend, Express will execute the functions you passed to app.use() in order. For example, if you wanted to print the HTTP method and the URL of every request, you would do the following:
+
+    ...
+
+    Using express.json()
+    express.json() is a built in middleware function in Express starting from v4.16.0. It parses incoming JSON requests and puts the parsed data in req.body.
+
+terus kita bikin handling nya dech ...
+
+    app.post('/books', (req, res) => {
+      const book = req.body;
+
+      db.collection('books')
+        .insertOne(book)
+        .then((result) => {
+          res.status(200).json(result);
+        })
+        .catch((err) => {
+          res.status(500).json({ error: 'Could not insert book'});
+        });
+    });
+
+jalan dech ...
