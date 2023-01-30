@@ -1,0 +1,34 @@
+Index itu kayak buat nyimpen sekumpulan document
+bedasarkan properti yang dicari.
+
+Misal jika kita punya 1000 document pada collection books,
+maka ketika kita mencari buku berdasarkan rating misalnya
+    db.books.find({ rating: 9})
+
+lalu kita menemukan hanya ada 10 buku dengan rating 9,
+hal yang terlihat sepertinya simple hanya memunculkan 9 buku,
+padahal yang terjadi adalah mongodb melakukan scanning
+pada semua collection yang berarti 1000 kali scanning
+untuk memeriksa apakah document memiliki rating 9.
+padahal cuma dapet 9 kan. ini baru 1000 gimana kalau se juta?
+tentu ini akan sangat tidak efisien jika db harus scanning 1 juta kali.
+Oh karena itu gimana kalau kita ngelompokin tadi yang 
+rating: 9 supaya pas dicari gak perlu scan 100 kali lagi,
+langsung nemu yang 9 itu. nah itu kita namakan index.
+
+cara membuat index
+
+    db.books.createIndex({ rating: 9 })
+
+cara melihat daftar index 
+
+    db.books.getIndexes()
+
+cara menghapus index 
+
+    db.books.dropIndex({ rating: 9 })
+
+cara liat detail proses pengambilan data.
+kayak tadi supaya tahu kalau si db ngelakuin scan 100 kali
+
+    db.books.find({ rating: 9 }).explain('executionStats')
