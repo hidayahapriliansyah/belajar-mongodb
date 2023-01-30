@@ -1,0 +1,77 @@
+AYOLOH ... MAEN MAEN MAENIN PROMISE LAGI ...
+berati bener ... fungsina callback function emang cocok na 
+jeung ngambil nilai tina promise ...
+
+kan si promise eta di dapetkeun tina hiji function nya.
+misal anu then, catch eta.
+
+ohhh jadi kieu ...
+
+misal aya hiji function anu di jero na ya promise nu mana hasilna
+bisa reject atau fullfil. nahh mun tanpa callback ...
+si function eta nya ngajalankeun jero na we ngamuncul keun antara
+fullfil tawa reject. nah si callback biasa na manehna nunguan tuh
+dina pas fullfil tawa reject na, lamun misal fullfil kumaha? lamun
+misal reject ek dikumahakeun?
+
+salasa hiji conto callback function bisa jeung ngecek error heunteu
+na si promise eta.
+
+lamun misal fullfil alias teu error. si callback eta teu ngembalikeun nilai
+nanaon. si nilai fullfil eta ditangkep ku variable lain nu mana aya function
+lain nu nga return variable eta. tapi lamun reject alias error katangkep dina catch, kakara si callback
+eta ngamasukkeun si error eta sebagai argumen function.
+
+nu mana lamun function anu aya promise eta dijalankeun, kan aya callback na 
+nya da ngahiji, ke bisa ngajieun si callback eta paragi ngecek error langsung.
+
+siga function dina course ieu ...
+
+db.js 
+
+const { MongoClient } = require('mongodb');
+
+let dbConnection;
+
+module.exports = {
+  connectToDb: (cb) => {
+    MongoClient.connect('mongodb://localhost:27017/bookstore')
+      .then((client) => {
+        dbConnection = client.db();
+        return cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        return cb(err);
+      }); 
+  },
+  getDb: () => dbConnection,
+};
+
+==================
+
+app.js 
+
+const express = require('express');
+const { connectToDb, getDb } = require('./db');
+
+// init and middleware
+const app = express();
+
+let db; 
+
+// dbconnection NAH FUNCTION NU IEU 
+connectToDb((err) => {
+  if (!err) {
+    app.listen(3000, () => {
+      console.log('app listening on http://localhost:3000');
+    });
+    db = getDb();
+  }
+});
+
+
+// routes
+app.get('/books', (req, res) => {
+  res.json({ message: 'Welcome to the api' });
+});
