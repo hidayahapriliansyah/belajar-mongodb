@@ -1,0 +1,40 @@
+'Untung pernah belajar hapi di dicoding hehe jadi asa mudah paham na'
+
+Kita akan ngecek dulu objek id yang dimasukkan harus sesuai 
+sama object id monog db.
+
+intinya pake id gitu lah.
+
+    const { ObjectId } = require('mongodb');
+
+    app.get('/books/:id', (req, res) => {
+      if (ObjectId.isValid(req.params.id)) {
+        db.collection('books')
+          .findOne({ _id: ObjectId(req.params.id) })
+          .then((doc) => {
+            res.status(200).json(doc);
+          })
+          .catch((err) => {
+            res.status(500).json({ error: 'Could not find the document' });
+          })
+      } else {
+        res.status(500).json({ error: 'Not valid id' });
+      }
+    });
+
+oh ieu terus lamun seandainya ObjectId na valid,
+monogdb bakal ngasih document null, lain malah error.
+
+tapi bisa diatasi ku cara ieu sih hehehe ...
+    db.collection('books')
+      .findOne({ _id: ObjectId(req.params.id) })
+      .then((doc) => {
+        if (!doc) {
+          res.status(400).json({ error: 'Could find document. Bad request.' });
+          return;
+        }
+        res.status(200).json(doc);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: 'Could not find the document' });
+      })
